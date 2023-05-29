@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>demo</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
+  <script src="https://cdn.staticfile.org/vue/2.6.12/vue.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>Message is: {{ message }}</p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'Loading...',
+      },
+      mounted: function() {
+        var self = this;
+        fetch('/hello.json')
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            self.message = data.message;
+            // self.$forceUpdate();
+          });
+      },
+      // mounted() {
+      //   fetch('/hello.json')
+      //     .then(resp => resp.json())
+      //     .then(data => {
+      //       this.message = data.message;
+      //     });
+      // },
+    });
+
+  </script>
+
+</body>
+
+</html>
